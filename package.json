@@ -1,0 +1,49 @@
+{
+  "name": "Hydrogen",
+  "main": "./lib/main",
+  "version": "0.4.2",
+  "description": "Run code and get results inline using Jupyter kernels like IPython, IJulia, and iTorch",
+  "author": "Will Whitney <me@willwhitney.com>",
+  "keywords": [
+    "execute",
+    "run",
+    "jupyter",
+    "ipython",
+    "julia",
+    "python",
+    "torch",
+    "ijulia",
+    "itorch",
+    "plot",
+    "image"
+  ],
+  "activationCommands": {
+    "atom-text-editor": "hydrogen:run"
+  },
+  "repository": "https://github.com/willwhitney/hydrogen",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=0.174.0 <2.0.0"
+  },
+  "dependencies": {
+    "atom-space-pen-views": "^2.0.5",
+    "lodash": "^3.8.0",
+    "react": "^0.13.3",
+    "uuid": "^2.0.1",
+    "zmq": "^2.11.1"
+  },
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^1.0.0": "consumeStatusBar"
+      }
+    }
+  },
+  "providedServices": {
+    "autocomplete.provider": {
+      "versions": {
+        "2.0.0": "provide"
+      }
+    }
+  }
+}

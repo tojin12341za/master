@@ -1,0 +1,358 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+@import "syntax-variables";
+
+// this is a hack to deal with a failing of the markers API
+// https://github.com/atom/atom/issues/6857
+.tab-bar {
+    z-index: 6;
+}
+
+.hydrogen.output-bubble {
+    @light-bubble-background: fadein(lighten(@syntax-background-color, 40%), 100%);
+    @dark-bubble-background: fadein(lighten(@syntax-background-color, 10%), 100%);
+    @bubble-background: contrast(@syntax-text-color, @dark-bubble-background, @light-bubble-background, 20%);
+    @button-text-color: lighten(@syntax-text-color, 20%);
+    color: lighten(@syntax-text-color, 10%);
+
+    position: absolute;
+    padding-left: 2px;
+    padding-right: 2px;
+    background-color: @bubble-background;
+    border-radius: 3px;
+    margin-left: 20px;
+    white-space: pre;
+
+    &.rich {
+        border: none;
+
+        &.svg {
+            background-color: white;
+        }
+
+        .rich-close-button {
+            &::before {
+                color: @button-text-color;
+                display: block;
+                position: absolute;
+                top: -12px;
+                right: -12px;
+                cursor: pointer;
+                border-radius: 50%;
+                width: 1.5em;
+                height: 1.5em;
+                line-height: 1.5em;
+                text-align: center;
+                background-color: darken(@bubble-background, 10%);
+                box-shadow: 0 0 2px 0px rgba(0,0,0,0.5);
+                margin: 0;
+            }
+        }
+    }
+
+    &:not(.multiline) {
+        .bubble-output-container {
+            display: inline;
+        }
+    }
+
+    &.multiline {
+        border: none;
+        padding-right: 0px;
+        display: flex;
+        box-shadow: 0 0 3px 1px rgba(0,0,0,0.3);
+
+        font-size: @font-size * 5/6;
+
+        // .bubble-result-container {
+        //     font-size: @font-size * 7/8;
+        // }
+    }
+
+    &.multiline:not(.rich) {
+        .bubble-action-panel {
+            display: inline-flex;
+        }
+
+        .bubble-output-container {
+            padding: 3px;
+        }
+
+        .rich-close-button::before {
+            display: none;
+        }
+    }
+
+    .rich-close-button::before {
+        display: none;
+    }
+
+    .bubble-output-container {
+        display: inline-block;
+        max-width: 500px;
+        max-height: 500px;
+        overflow: hidden;
+    }
+
+
+    .bubble-result-container {
+        position: relative;
+
+        img, svg {
+            background-color: white;
+        }
+
+        video, img, svg {
+            display: block;
+            max-width: 450px;
+            max-height: 450px;
+        }
+    }
+
+    .bubble-error-container {
+        @error-base-color: average(@syntax-text-color, red);
+        color: @error-base-color;
+        // font-size: @font-size * 7/8;
+    }
+
+    .bubble-status-container::before {
+        margin: 0px;
+        font-size: @font-size * 7/6;
+        width: 80%;
+    }
+
+    .bubble-action-panel {
+        display: none;
+        flex-direction: column;
+        width: 30px;
+        background-color: darken(@bubble-background, 10%);
+        box-shadow: inset 1px 0px 1px 0px rgba(0,0,0,0.4);
+        border-radius: 0 3px 3px 0;
+
+        .action-button {
+            @separator-color: fade(darken(@bubble-background, 20%), 20%);
+            flex: none;
+
+
+            border-top: 1px solid @separator-color;
+
+            &:nth-child(1) {
+                border-top: none;
+                border-bottom: 1px solid @separator-color;
+            }
+
+            &::before {
+                width: 100%;
+                height: 30px;
+                text-align: center;
+                color: @button-text-color;
+                cursor: pointer;
+                text-align: center;
+                margin: 0;
+                line-height: 30px;
+            }
+
+        }
+
+        .padding {
+            flex: 1;
+        }
+    }
+
+    .close-button {
+        &::after {
+            color: @button-text-color;
+            display: none;
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            cursor: pointer;
+            border-radius: 50%;
+            padding: 1px;
+            width: 1.5em;
+            height: 1.5em;
+            text-align: center;
+            background-color: darken(@bubble-background, 10%);
+            box-shadow: 0 0 2px 0px rgba(0,0,0,0.5);
+        }
+    }
+}
+
+.hydrogen.watch-sidebar {
+    height: 100%;
+    width: 300px;
+    min-width: 200px;
+    overflow-y: scroll;
+    margin: 5px;
+
+    .watch-sidebar-title {
+        text-align: center;
+        // padding-top: 15px;
+        margin-bottom: 5px;
+    }
+
+    .watch-sidebar-language {
+        margin-top: 5px;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .watch-view {
+        width: 100%;
+        margin-top: 20px;
+
+        .watch-input {
+            border-radius: 3px;
+            background-color: @syntax-background-color;
+            margin: 5px;
+            font-size: @font-size;
+            min-height: 3em;
+        }
+    }
+
+    .watch-resize-handle {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: -5px;
+        width: 10px;
+        cursor: ew-resize;
+    }
+
+    .add-watch {
+        margin: 2%;
+        width: 96%;
+    }
+
+    .output-bubble.empty {
+        display: none;
+    }
+
+    .output-bubble {
+        position: static;
+        display: flex;
+        border-radius: 0px;
+        margin: 5px;
+        font-size: @font-size;
+        box-shadow: none;
+        padding-left: 0px;
+        padding-right: 0px;
+
+
+        &.rich .rich-close-button {
+            display: none;
+        }
+
+        &:not(.rich) {
+            .bubble-action-panel {
+                display: inline-flex;
+                flex-direction: column;
+                width: 30px;
+                border-radius: 0;
+            }
+        }
+
+        .bubble-output-container {
+            display: inline-block;
+            width: 100%;
+            max-height: 400px;
+            overflow-y: scroll;
+            white-space: pre-wrap;
+        }
+
+
+        .bubble-result-container {
+            position: relative;
+
+            video, img, svg {
+                display: block;
+                max-width: 100%;
+                max-height: 450px;
+            }
+        }
+
+        .bubble-error-container {
+            // font-size: @font-size;
+        }
+    }
+}
+
+.hydrogen.status-container {
+    display: inline-block;
+    cursor: pointer;
+
+    .status:hover {
+        text-decoration: underline;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.hydrogen {
+    .spinner {
+        display:inline-block;
+        text-align: center;
+        line-height: 100%;
+        position: relative;
+        top: 1px;
+    }
+
+    .spinner > div {
+        background-color: @text-color;
+        height: 100%;
+        width: 2px;
+        display: inline-block;
+
+        -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+        animation: stretchdelay 1.2s infinite ease-in-out;
+    }
+
+    .spinner .rect2 {
+        -webkit-animation-delay: -1.1s;
+        animation-delay: -1.1s;
+        margin-left: 1px;
+    }
+
+    .spinner .rect3 {
+        -webkit-animation-delay: -1.0s;
+        animation-delay: -1.0s;
+        margin-left: 1px;
+    }
+
+    .spinner .rect4 {
+        -webkit-animation-delay: -0.9s;
+        animation-delay: -0.9s;
+        margin-left: 1px;
+    }
+
+    .spinner .rect5 {
+        -webkit-animation-delay: -0.8s;
+        animation-delay: -0.8s;
+        margin-left: 1px;
+    }
+
+    @-webkit-keyframes stretchdelay {
+        0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
+        20% { -webkit-transform: scaleY(1.0) }
+    }
+
+    @keyframes stretchdelay {
+        0%, 40%, 100% {
+            transform: scaleY(0.4);
+            -webkit-transform: scaleY(0.4);
+            }
+        20% {
+            transform: scaleY(1.0);
+            -webkit-transform: scaleY(1.0);
+        }
+    }
+}
